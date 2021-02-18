@@ -1,19 +1,46 @@
-import Link from "next/link";
+import {
+  Button,
+  CssBaseline,
+  Grid,
+  Typography,
+  Paper,
+} from "@material-ui/core";
 
-import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
-import CameraIcon from "@material-ui/icons/PhotoCamera";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Grid from "@material-ui/core/Grid";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
+import { makeStyles } from "@material-ui/core";
 
-import useStyles from "./styles";
+const useStyles = makeStyles((theme) => ({
+  root: {
+    height: "100vh",
+  },
+  icon: {
+    marginRight: theme.spacing(2),
+  },
+  image: {
+    backgroundImage: "url(purple_nebula.jpg)",
+    backgroundRepeat: "no-repeat",
+    backgroundColor:
+      theme.palette.type === "light"
+        ? theme.palette.grey[50]
+        : theme.palette.grey[900],
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  },
+  hero: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(4),
+  },
+  submit: {
+    margin: theme.spacing(8, 0, 0),
+  },
+  paper: {
+    margin: theme.spacing(2, 4),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+}));
 
-export default function Album() {
+const Index = () => {
   const classes = useStyles();
 
   return (
@@ -22,7 +49,7 @@ export default function Album() {
         <CssBaseline />
         <Grid item xs={12} sm={6} md={3} component={Paper} elevation={6} square>
           <div className={classes.paper}>
-            <img src="/nasa-logo.png" width="300px" objectFit="cover" />
+            <img src="/nasa-logo.png" width="300px" objectfit="cover" />
             <div className={classes.hero}>
               <Typography variant="h4">As melhores imagens</Typography>
               <Button
@@ -52,4 +79,6 @@ export default function Album() {
       </Grid>
     </>
   );
-}
+};
+
+export default Index;

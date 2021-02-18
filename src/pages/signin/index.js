@@ -1,8 +1,6 @@
-import React from "react";
 import Link from "next/link";
 
 import {
-  Avatar,
   Button,
   CssBaseline,
   TextField,
@@ -14,11 +12,43 @@ import {
   Typography,
 } from "@material-ui/core";
 
-import { LockOutlined } from "@material-ui/icons";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
-import useStyles from "./styles";
+import { makeStyles } from "@material-ui/core";
 
-function Copyright() {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    height: "100vh",
+  },
+  image: {
+    backgroundImage: "url(earth2.jpg)",
+    backgroundRepeat: "no-repeat",
+    backgroundColor:
+      theme.palette.type === "light"
+        ? theme.palette.grey[50]
+        : theme.palette.grey[900],
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  },
+  paper: {
+    margin: theme.spacing(2, 4),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+  return: {
+    alignSelf: "flex-start",
+  },
+}));
+
+const Copyright = () => {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Made by "}
@@ -27,9 +57,9 @@ function Copyright() {
       </Link>
     </Typography>
   );
-}
+};
 
-export default function SignInSide() {
+const Signin = () => {
   const classes = useStyles();
 
   return (
@@ -38,8 +68,17 @@ export default function SignInSide() {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <img src="/nasa-logo.png" width="300px" objectFit="cover" />
+          <Button
+            href="/"
+            variant="outlined"
+            color="primary"
+            size="small"
+            className={classes.return}
+          >
+            <ArrowBackIcon />
+          </Button>
 
+          <img src="/nasa-logo.png" width="300px" objectfit="cover" />
           <form className={classes.form} noValidate>
             <TextField
               variant="outlined"
@@ -47,7 +86,7 @@ export default function SignInSide() {
               required
               fullWidth
               id="email"
-              label="Seu melhor e-mail"
+              label="Email"
               name="email"
               autoComplete="email"
               autoFocus
@@ -58,23 +97,15 @@ export default function SignInSide() {
               required
               fullWidth
               name="password"
-              label="Crie uma senha"
+              label="Senha"
               type="password"
               id="password"
               autoComplete="current-password"
             />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Repita sua senha"
-              type="password"
-              id="password"
-              autoComplete="current-password"
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Mantenha-me conectado"
             />
-
             <Button
               type="submit"
               fullWidth
@@ -82,14 +113,19 @@ export default function SignInSide() {
               color="primary"
               className={classes.submit}
             >
-              Criar conta
+              Entrar
             </Button>
             <Grid container>
-              <Grid item xs align="center">
-                <Link href="/signin">Já tenho uma conta.</Link>
+              <Grid item xs>
+                <Typography variant="body2">
+                  <Link href="/fotgot_password">Esqueceu sua senha?</Link>
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Link href="/signup">Não tenho uma conta.</Link>
               </Grid>
             </Grid>
-            <Box mt={10}>
+            <Box mt={15}>
               <Copyright />
             </Box>
           </form>
@@ -97,4 +133,6 @@ export default function SignInSide() {
       </Grid>
     </Grid>
   );
-}
+};
+
+export default Signin;
