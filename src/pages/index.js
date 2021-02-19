@@ -63,7 +63,7 @@ const Index = () => {
                 Fazer login
               </Button>
               <Button
-                href="/signup"
+                href="/gallery"
                 fullWidth
                 variant="contained"
                 color="primary"
