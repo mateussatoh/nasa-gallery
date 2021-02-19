@@ -1,31 +1,47 @@
-import useStyles from "./styles";
 import {
   Container,
   AppBar,
   Button,
   Card,
-  CardActions,
   CardMedia,
   CssBaseline,
   Grid,
   Toolbar,
   Typography,
-  Link,
 } from "@material-ui/core";
 import { ArrowBack } from "@material-ui/icons";
+import { makeStyles } from "@material-ui/core";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import Link from "next/link";
+
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    marginRight: theme.spacing(2),
+  },
+  return: {
+    color: "white",
+  },
+  cardGrid: {
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(3),
+  },
+  card: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+  },
+  cardMedia: {
+    cursor: "pointer",
+    paddingTop: "56.25%", // 16:9
+  },
+  cardContent: {
+    flexGrow: 1,
+  },
+  footer: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(6),
+  },
+}));
 
 export default function Gallery({ apodImagesJson }) {
   const classes = useStyles();
@@ -54,11 +70,13 @@ export default function Gallery({ apodImagesJson }) {
             {apodImagesJson.map((apod) => (
               <Grid item key={apod} xs={12} sm={6} md={6}>
                 <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image={apod.url}
-                    title="Image title"
-                  />
+                  <Link href={`/gallery/${apod.date}`}>
+                    <CardMedia
+                      className={classes.cardMedia}
+                      image={apod.url}
+                      title="Image title"
+                    />
+                  </Link>
                 </Card>
               </Grid>
             ))}
@@ -78,7 +96,6 @@ export default function Gallery({ apodImagesJson }) {
         >
           Something here to give the footer a purpose!
         </Typography>
-        <Copyright />
       </footer>
       {/* End footer */}
     </>
@@ -94,7 +111,9 @@ export async function getStaticProps() {
   );
   const apodJson = await apodRes.json();
 
-  const apodImagesJson = apodJson.filter((apod) => apod.media_type !== "video");
+  const apodImagesJson = await apodJson.filter(
+    (apod) => apod.media_type !== "video"
+  );
 
   return {
     props: {
