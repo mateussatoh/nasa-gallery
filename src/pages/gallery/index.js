@@ -15,6 +15,10 @@ import { makeStyles } from "@material-ui/core";
 import Link from "next/link";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: "black",
+    height: "100%",
+  },
   icon: {
     marginRight: theme.spacing(2),
   },
@@ -47,7 +51,7 @@ export default function Gallery({ apodImagesJson }) {
   const classes = useStyles();
 
   return (
-    <>
+    <div className={classes.root}>
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar>
@@ -98,7 +102,7 @@ export default function Gallery({ apodImagesJson }) {
         </Typography>
       </footer>
       {/* End footer */}
-    </>
+    </div>
   );
 }
 

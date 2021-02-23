@@ -5,42 +5,9 @@ import {
   Typography,
   Paper,
 } from "@material-ui/core";
+import { useStyles } from "../styles/home";
 
-import { makeStyles } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: "100vh",
-  },
-  icon: {
-    marginRight: theme.spacing(2),
-  },
-  image: {
-    backgroundImage: "url(purple_nebula.jpg)",
-    backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "light"
-        ? theme.palette.grey[50]
-        : theme.palette.grey[900],
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  },
-  hero: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(4),
-  },
-  submit: {
-    margin: theme.spacing(8, 0, 0),
-  },
-  paper: {
-    margin: theme.spacing(2, 4),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-}));
-
-const Index = () => {
+export default function Index() {
   const classes = useStyles();
 
   return (
@@ -49,7 +16,7 @@ const Index = () => {
         <CssBaseline />
         <Grid item xs={12} sm={6} md={3} component={Paper} elevation={6} square>
           <div className={classes.paper}>
-            <img src="/nasa-logo.png" width="300px" objectfit="cover" />
+            <img src="/nasa-logo.png" width="300px" />
             <div className={classes.hero}>
               <Typography variant="h4">As melhores imagens</Typography>
               <Button
@@ -79,6 +46,4 @@ const Index = () => {
       </Grid>
     </>
   );
-};
-
-export default Index;
+}
