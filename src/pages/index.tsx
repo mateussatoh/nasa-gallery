@@ -18,17 +18,14 @@ export default function Index() {
           <div className={classes.paper}>
             <img src="/nasa-logo.png" width="300px" />
             <div className={classes.hero}>
-              <Typography variant="h4">As melhores imagens</Typography>
-              <Button
-                href="/signup"
-                fullWidth
-                variant="contained"
-                color="primary"
-                size="large"
-                className={classes.submit}
-              >
-                Fazer login
-              </Button>
+              <Typography variant="h6">
+                O nitrogênio em nosso DNA, o cálcio em nossos dentes, o ferro em
+                nosso sangue, o carbono em nossas tortas de maçã foi feito no
+                interior das estrelas em colapso. Nós somos feitos da poeira de
+                estrelas.
+              </Typography>
+              <Typography variant="h5"></Typography>
+              <Typography variant="h5"> - Carl Sagan</Typography>
               <Button
                 href="/gallery"
                 fullWidth
@@ -37,7 +34,7 @@ export default function Index() {
                 size="large"
                 className={classes.submit}
               >
-                Entrar como convidado
+                se aventure na galeria
               </Button>
             </div>
           </div>
