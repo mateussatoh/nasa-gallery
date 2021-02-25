@@ -30,7 +30,6 @@ interface NasaResponse {
 export default function Gallery({ apodImagesJson }) {
   const classes = useStyles();
 
-  console.log(apodImagesJson);
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -52,8 +51,8 @@ export default function Gallery({ apodImagesJson }) {
       <main>
         <Container className={classes.cardGrid}>
           <Grid container spacing={2}>
-            {apodImagesJson.map((apod: NasaResponse) => (
-              <Grid item xs={12} sm={6} md={6}>
+            {apodImagesJson.map((apod: NasaResponse, index) => (
+              <Grid key={index} item xs={12} sm={6} md={6}>
                 <Card className={classes.card}>
                   <Link href={`/gallery/${apod.date}`}>
                     <CardMedia
@@ -85,12 +84,12 @@ export default function Gallery({ apodImagesJson }) {
   );
 }
 
-const secondsInDay = 60 * 60 * 24;
+const SECONDS_IN_DAY = 60 * 60 * 24;
 
 export const getStaticProps: GetStaticProps = async () => {
   const API_KEY = process.env.API_KEY;
   const apodRes = await fetch(
-    `https://api.nasa.gov/planetary/apod?start_date=2021-01-01&thumbs=true&api_key=${API_KEY}`
+    `https://api.nasa.gov/planetary/apod?start_date=2020-10-01&thumbs=true&api_key=${API_KEY}`
   );
 
   const apodJson = await apodRes.json();
@@ -101,6 +100,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       apodImagesJson,
     },
-    revalidate: secondsInDay,
+    revalidate: SECONDS_IN_DAY,
   };
 };

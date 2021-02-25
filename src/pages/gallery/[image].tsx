@@ -1,17 +1,21 @@
-import {
-  Button,
-  CssBaseline,
-  Grid,
-  Typography,
-  Paper,
-  Card,
-} from "@material-ui/core";
+import { Button, CssBaseline, Grid } from "@material-ui/core";
 
 import { ArrowBack } from "@material-ui/icons";
 
 import Image from "next/image";
 
 import { useStyles } from "../../styles/images";
+
+interface NasaResponse {
+  copyright?: string;
+  date?: string;
+  explanation?: string;
+  hdurl: string;
+  media_type?: string;
+  service_version?: string;
+  title?: string;
+  url?: string;
+}
 
 const Index = ({ apod }) => {
   const classes = useStyles();
@@ -22,7 +26,7 @@ const Index = ({ apod }) => {
       <Grid item>
         <Image
           src={apod.hdurl}
-          quality={100}
+          quality={90}
           layout="fill"
           objectFit="contain"
           objectPosition="center "
@@ -46,7 +50,7 @@ export async function getServerSideProps(context) {
   const apodRes = await fetch(
     `https://api.nasa.gov/planetary/apod?date=${apodDate}&api_key=${API_KEY}`
   );
-  const apod = await apodRes.json();
+  const apod: NasaResponse = await apodRes.json();
 
   return {
     props: {
